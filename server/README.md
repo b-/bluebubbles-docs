@@ -14,6 +14,12 @@ The server uses AppleScript to perform simple functions like sending messages & 
 
 Any macOS device running Sierra and newer, with iMessage activated successfully.
 
+### Why macOS is required
+
+BlueBubbles cannot run as an ordinary Linux or Windows container. The server relies on the macOS Messages app and its `chat.db` database, AppleScript, and, for optional Private API features, macOS-only frameworks, so it must run within macOS.
+
+A Linux host can still use Docker or Podman to run a macOS virtual machine. See the [macOS virtualization overview](advanced/macos-virtualization/) or the [Docker-OSX guide](advanced/macos-virtualization/running-bluebubbles-in-docker-osx/) for those setups. In both cases, BlueBubbles runs in the macOS guest rather than directly on the Linux host.
+
 {% hint style="info" %}
 macOS El Capitan is _no longer supported_
 {% endhint %}
