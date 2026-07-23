@@ -35,16 +35,22 @@ The name of the project does not have to be **BlueBubblesApp** if you already ha
 {% endhint %}
 
 1. Click **Create a Project** and enter **BlueBubblesApp** as the name. Disable Google Analytics (why do you want Google spying on you?) and wait for the project to be created.
-2. In the tabs on the far left, click **Build** > **Firestore Database.**
-3. Next, **Create database** and press **Next > Enable.** You can change the database location if you are not based in North America so it is closer to you.
-4. If Cloud Firestore glitches and does not show you the database page, simply refresh the page.
-5. In the tabs near the top, click **Rules**
-6. Set the rule's condition from `allow read, write: if false;` to `allow read, write: if true;` (Change false to true) and click **Publish**.
-7. Click the gear cog in the top left and click **Project Settings**.
-8. In the tabs near the top, navigate to **Service Accounts**. Generate a new private key and save this locally. **This will download file 1 / 2 needed for the manual setup.**
-9. Next, navigate to the **General** tab.
-10. Scroll to the bottom of the page and click the Android icon to add an Android app. Set the package name to `com.bluebubbles.messaging` and leave the other fields blank.
-11. Click **Register app**, then **Download google\_services.json**. **This will download file 2 / 2 needed for the manual setup.**
+2. Open the navigation menu and select **Databases** > **Firestore**. Depending on which console layout Google shows you, this may instead appear as **Build** > **Firestore Database**.
+3. Click **Create database**.
+4. On the **Create database** page:
+   * Leave the **Database ID** set to `(default)`.
+   * Select **Standard Edition**.
+   * Select **Firestore in Native mode**.
+   * Select **Restricted** security rules. You will update these rules in the next steps.
+   * Choose a region or multi-region close to the Mac running BlueBubbles, then click **Create Database**.
+5. If Cloud Firestore does not show the database page after creation, refresh the page.
+6. In the tabs near the top, click **Rules**.
+7. Set the rule's condition from `allow read, write: if false;` to `allow read, write: if true;` (Change false to true) and click **Publish**.
+8. Click the gear cog in the top left and click **Project Settings**.
+9. In the tabs near the top, navigate to **Service Accounts**. Generate a new private key and save this locally. **This will download file 1 / 2 needed for the manual setup.**
+10. Next, navigate to the **General** tab.
+11. Scroll to the bottom of the page and click the Android icon to add an Android app. Set the package name to `com.bluebubbles.messaging` and leave the other fields blank.
+12. Click **Register app**, then **Download google\_services.json**. **This will download file 2 / 2 needed for the manual setup.**
 {% endtab %}
 
 {% tab title="Video Guide" %}
