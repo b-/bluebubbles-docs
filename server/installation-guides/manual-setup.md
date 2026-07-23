@@ -35,14 +35,15 @@ The name of the project does not have to be **BlueBubblesApp** if you already ha
 {% endhint %}
 
 1. Click **Create a Project** and enter **BlueBubblesApp** as the name. Disable Google Analytics (why do you want Google spying on you?) and wait for the project to be created.
-2. Open the navigation menu and select **Databases** > **Firestore**. Depending on which console layout Google shows you, this may instead appear as **Build** > **Firestore Database**.
-3. Click **Create database**.
+2. Open the navigation menu and select **Databases & Storage** > **Firestore**. Depending on which console layout Google shows you, this may instead appear as **Build** > **Firestore Database**.
+3. Click **Create database**. If the project already has a Firestore database, this button is labeled **Add database** instead.
 4. On the **Create database** page:
-   * Leave the **Database ID** set to `(default)`.
-   * Select **Standard Edition**.
-   * Select **Firestore in Native mode**.
-   * Select **Restricted** security rules. You will update these rules in the next steps.
-   * Choose a region or multi-region close to the Mac running BlueBubbles, then click **Create Database**.
+   * Leave the **Database ID** set to `(default)`, if this option is shown.
+   * Select **Standard edition**, if this option is shown.
+   * Select **Firestore in Native mode**, if this option is shown.
+   * Choose a region or multi-region close to the Mac running BlueBubbles.
+   * Select **Production mode** for the starting security rules. You will replace these rules in the next steps.
+   * Click **Create**.
 5. If Cloud Firestore does not show the database page after creation, refresh the page.
 6. In the tabs near the top, click **Rules**.
 7. Set the rule's condition from `allow read, write: if false;` to `allow read, write: if true;` (Change false to true) and click **Publish**.
