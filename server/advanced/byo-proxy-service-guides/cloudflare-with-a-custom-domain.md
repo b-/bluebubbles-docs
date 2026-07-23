@@ -17,9 +17,9 @@ Cons:
 
 1. Sign up for a Cloudflare account at [https://dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up)
 2. Add a site on the portal
-3. Enter your domain name (do not use a subdomain)
+3. Enter your root domain name (for example, `example.com`, not `bluebubbles.example.com`). You will choose the BlueBubbles subdomain when you create the tunnel.
 4. Click the free plan and click continue
-5. If you are using the domain for any other websites copy the records below (if you are just using the domain for BlueBubbles you can skip this part)
+5. Before changing your name servers, review the DNS records Cloudflare imported. If the domain already hosts a website, email, or another service, compare the imported records with your current DNS provider and add any missing A, AAAA, CNAME, MX, or TXT records so those services continue to work.
 6. Configure your domain name servers to Cloudflare
 7. Wait for Cloudflare to validate your domain
 
@@ -33,12 +33,12 @@ Cons:
 6. After installing cloudflared, you can see that when choosing your OS as Mac, cloudflare provides a command to enter into terminal. Run this command.
 7. Once the command has been run successfully, your connector will show up underneath the command in the Zero Trust Dashboard.
 8. Select Next
-9. Now in the Public Hostnames tab, type in your subdomain, for example, bluebubbles.(This does not have to be the name of your tunnel)
+9. Now in the Public Hostnames tab, type in your subdomain, for example, `bluebubbles`. (This does not have to be the name of your tunnel.)
 10. Choose the main domain you want to use for it.
 11. Below, you should see a section called Service. For this, you want to put the localhost address for the bluebubbles server. The default one would be: HTTP://localhost:1234 .
 12. Save the tunnel
 13. After doing this, you may need to run sudo launchctl start _com.cloudflare.cloudflared_ when initially setting up the tunnel to start it.
-14. Navigate back to Networks > Tunnels and copy the tunnel ID for your newly created tunnel. Once copied head to dash.cloudflare.com and select the domain you used for the tunnel. After this go to DNS and under DNS management add a CNAME record with the "Name" being the subdomain you picked in step 9 and "Target" being the tunnel ID you copied.
+14. In the main Cloudflare dashboard, open your domain's DNS records and confirm that the subdomain from step 9 has a CNAME record pointing to `<tunnel-UUID>.cfargotunnel.com`. Saving the public hostname normally creates this record automatically. If it is missing, copy the tunnel UUID from Networks > Tunnels and add the CNAME record manually.
 
 As we installed cloudflared as a service, it should automatically launch at startup.
 
