@@ -41,7 +41,7 @@ The name of the project does not have to be **BlueBubblesApp** if you already ha
    * Leave the **Database ID** set to `(default)`, if this option is shown.
    * Select **Standard edition**, if this option is shown.
    * Select **Firestore in Native mode**, if this option is shown.
-   * Choose a region or multi-region close to the Mac running BlueBubbles.
+   * Choose a region or multi-region close to the Mac running BlueBubbles. This location cannot be changed after the database is created, so review the selection before continuing.
    * Select **Production mode** for the starting security rules. You will replace these rules in the next steps.
    * Click **Create**.
 5. If Cloud Firestore does not show the database page after creation, refresh the page.
