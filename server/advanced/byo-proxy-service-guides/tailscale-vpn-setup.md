@@ -26,6 +26,10 @@ Alternatively, you can use `/Applications/Tailscale.app/Contents/MacOS/Tailscale
 tailscale funnel --bg --https=443 1234
 ```
 
+{% hint style="warning" %}
+If you followed an older version of this guide, first inspect both `tailscale serve status` and `tailscale funnel status` for a persisted Serve route on port 443. Running the Funnel command above makes Funnel the active mode for that public port; confirm the route afterward with `tailscale funnel status`. Do not use a blanket `tailscale serve reset` as a migration shortcut because it also removes unrelated Serve routes on the machine.
+{% endhint %}
+
 The first time you run this command, Tailscale opens a browser page for you to approve Funnel. After approval, Tailscale automatically provisions the HTTPS certificate and adds the default Funnel node attribute to your tailnet policy.
 
 {% hint style="info" %}
@@ -46,6 +50,7 @@ https://machine-name.example.ts.net/
 
 ---
 - [Tailscale Funnel CLI](https://tailscale.com/docs/reference/tailscale-cli/funnel)
+- [Tailscale Serve CLI](https://tailscale.com/docs/reference/tailscale-cli/serve)
 - [Tailscale Funnel Documentation](https://tailscale.com/docs/features/tailscale-funnel)
 - [Access Control Lists (ACLs)](https://tailscale.com/kb/1018/acls/)
 - [Download](https://tailscale.com/download/mac)
