@@ -19,7 +19,7 @@ Cons:
 2. Add a site on the portal
 3. Enter your root domain name (for example, `example.com`, not `bluebubbles.example.com`). You will choose the BlueBubbles subdomain when you create the tunnel.
 4. Click the free plan and click continue
-5. Before changing your name servers, review the DNS records Cloudflare imported. If the domain already hosts a website, email, or another service, compare the imported records with your current DNS provider and add any missing A, AAAA, CNAME, MX, or TXT records so those services continue to work.
+5. Before changing your name servers, review the DNS records Cloudflare imported. If the domain already hosts a website, email, or another service, compare every current record with the imported records and add anything missing so those services continue to work. Record types to check include, but are not limited to, A, AAAA, CNAME, MX, TXT, SRV, and CAA.
 6. Configure your domain name servers to Cloudflare
 7. Wait for Cloudflare to validate your domain
 
