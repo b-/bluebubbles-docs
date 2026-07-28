@@ -36,22 +36,21 @@ The name of the project does not have to be **BlueBubblesApp** if you already ha
 
 1. Click **Create a Project** and enter **BlueBubblesApp** as the name. Disable Google Analytics (why do you want Google spying on you?) and wait for the project to be created.
 2. Open the navigation menu and select **Databases & Storage** > **Firestore**. Depending on which console layout Google shows you, this may instead appear as **Build** > **Firestore Database**.
-3. Click **Create database**. If the project already has a Firestore database, this button is labeled **Add database** instead.
-4. On the **Create database** page:
+3. Click **Create database**. If the project already has a Firestore database, this button is labeled **Add database** instead. On the **Create database** page:
    * Leave the **Database ID** set to `(default)`, if this option is shown.
    * Select **Standard edition**, if this option is shown.
    * Select **Firestore in Native mode**, if this option is shown.
    * Choose a region or multi-region close to the Mac running BlueBubbles. This location cannot be changed after the database is created, so review the selection before continuing.
    * Select **Production mode** for the starting security rules. You will replace these rules in the next steps.
    * Click **Create**.
-5. If Cloud Firestore does not show the database page after creation, refresh the page.
-6. In the tabs near the top, click **Rules**.
-7. Set the rule's condition from `allow read, write: if false;` to `allow read, write: if true;` (Change false to true) and click **Publish**.
-8. Click the gear cog in the top left and click **Project Settings**.
-9. In the tabs near the top, navigate to **Service Accounts**. Generate a new private key and save this locally. **This will download file 1 / 2 needed for the manual setup.**
-10. Next, navigate to the **General** tab.
-11. Scroll to the bottom of the page and click the Android icon to add an Android app. Set the package name to `com.bluebubbles.messaging` and leave the other fields blank.
-12. Click **Register app**, then **Download google\_services.json**. **This will download file 2 / 2 needed for the manual setup.**
+4. If Cloud Firestore glitches and does not show you the database page, simply refresh the page.
+5. In the tabs near the top, click **Rules**
+6. Set the rule's condition from `allow read, write: if false;` to `allow read, write: if true;` (Change false to true) and click **Publish**.
+7. Click the gear cog in the top left and click **Project Settings**.
+8. In the tabs near the top, navigate to **Service Accounts**. Generate a new private key and save this locally. **This will download file 1 / 2 needed for the manual setup.**
+9. Next, navigate to the **General** tab.
+10. Scroll to the bottom of the page and click the Android icon to add an Android app. Set the package name to `com.bluebubbles.messaging` and leave the other fields blank.
+11. Click **Register app**, then **Download google\_services.json**. **This will download file 2 / 2 needed for the manual setup.**
 {% endtab %}
 
 {% tab title="Video Guide" %}
