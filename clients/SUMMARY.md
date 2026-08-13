@@ -1,7 +1,9 @@
 # Table of contents
 
 * [Intro and Background](README.md)
-* [Build Yourself / Contribution Guide](build-yourself-contribution-guide.md)
+* [Build Yourself / Contribution Guide](build-yourself-contribution-guide/README.md)
+  * [Architecture Overview](build-yourself-contribution-guide/architecture.md)
+  * [Theming and Components](build-yourself-contribution-guide/theming-and-components.md)
 * [Desktop App Installation](desktop-app-installation.md)
 * [FAQ](https://bluebubbles.app/faq)
 * [Private API Setup](https://docs.bluebubbles.app/helper-bundle/installation)
