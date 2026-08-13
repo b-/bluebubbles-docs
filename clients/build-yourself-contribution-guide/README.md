@@ -243,6 +243,13 @@ dart format ./ --line-length=120
 
 This project uses a max line length of **120 characters**.
 
+## Codebase Reference
+
+Before diving into an issue, it's worth getting familiar with how the app is put together. These pages go deeper than this guide into the client codebase itself:
+
+* [Architecture Overview](architecture.md) — the app's layers (UI, services, background isolates, database), state management (`GetIt` vs `GetX`, `ChatState`/`MessageState`), and service startup order.
+* [Theming and Components](theming-and-components.md) — the reusable `BBScaffold`/`BBAppBar`/`BBChip`/dialog widgets, and how the skin (iOS/Material/Samsung) and theme (light/dark/custom colors) systems work under the hood.
+
 ## Workflow: Picking an Issue
 
 1. Check the [issues page](https://github.com/BlueBubblesApp/bluebubbles-app/issues)
