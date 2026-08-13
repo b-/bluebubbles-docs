@@ -151,7 +151,6 @@ The Android app is built using [Flutter build flavors](https://docs.flutter.dev/
 * **prodNoAa**: Identical to `prod`, but without Android Auto support
 * **beta**: Beta testing builds with Firebase Test Lab integration
 * **alpha**: Internal alpha testing builds
-* **joel** / **tanay**: Personal developer builds used by maintainers, signed with the debug key so they build without any keystore setup
 
 To build or run a specific flavor:
 
@@ -191,7 +190,7 @@ Assigning `signingConfigs.debug` lets the flavor build immediately using Flutter
 
 ### Signing Keys (Keystore)
 
-**Debug builds** — `flutter run`, or any flavor assigned `signingConfigs.debug` (like `joel` and `tanay`) — require no setup from you. Flutter automatically generates a debug keystore (`~/.android/debug.keystore`) the first time you build, and it's used automatically.
+**Debug builds** — `flutter run`, or any flavor assigned `signingConfigs.debug` — require no setup from you. Flutter automatically generates a debug keystore (`~/.android/debug.keystore`) the first time you build, and it's used automatically.
 
 **Release builds** — `flutter build apk --release`, for flavors assigned `signingConfigs.release` (`prod`, `prodNoAa`, `beta`, `alpha`) — need a keystore you control:
 
@@ -210,7 +209,7 @@ Assigning `signingConfigs.debug` lets the flavor build immediately using Flutter
    storeFile=/absolute/path/to/bluebubbles-release-key.jks
    ```
 
-`android/app/build.gradle` reads `key.properties` automatically and wires it into `signingConfigs.release` — no other changes are needed. If `key.properties` is missing, any flavor using `signingConfigs.release` will fail to build with a signing error. While testing locally, it's often easiest to just build one of the debug-signed flavors (`joel`/`tanay`) instead of setting up a keystore.
+`android/app/build.gradle` reads `key.properties` automatically and wires it into `signingConfigs.release` — no other changes are needed. If `key.properties` is missing, any flavor using `signingConfigs.release` will fail to build with a signing error. While testing locally, it's often easiest to add your own flavor assigned to `signingConfigs.debug` (see above) instead of setting up a keystore.
 
 ### Web
 
