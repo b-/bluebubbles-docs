@@ -12,7 +12,7 @@ This page is adapted from `docs/THEMING_AND_COMPONENTS.md` in the [`bluebubbles-
 
 Reference for the app's reusable custom widgets: standardized `Scaffold`/`AppBar`/`Chip` wrappers and the shared skin-aware dialog builders. Use these instead of raw Flutter/Material/Cupertino equivalents wherever they exist — they bake in the app's theming, platform, and skin conventions so individual screens don't have to re-derive them.
 
-See [Theming](theming-and-components.md#theming) below for how color, skin, and window-effect state actually flow into these components.
+See [Theming](#theming) below for how color, skin, and window-effect state actually flow into these components.
 
 ## `BBScaffold`
 
