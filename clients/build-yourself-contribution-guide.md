@@ -106,8 +106,6 @@ We build off of the `master` branch — always branch from, and open your pull r
 
 ### Installing Dependencies
 
-Add a file named `.env` to the root of the project directory. Inside it, place `GIPHY_API_KEY = ""`. This is to prevent a build error.
-
 ```bash
 # If using FVM
 fvm flutter pub get
@@ -145,13 +143,78 @@ flutter build apk --flavor=prod --release
 flutter build apk --flavor=beta --release --split-per-abi
 ```
 
+#### Flavors
+
+The Android app is built using [Flutter build flavors](https://docs.flutter.dev/deployment/flavors), which let several variants of the app (different app names, icon colors, and application/package IDs) ship from the same codebase without conflicting with each other on a device. Flavors are defined in the `productFlavors` block of `android/app/build.gradle`:
+
+* **prod**: Production builds for the Google Play Store (`com.bluebubbles.messaging`) - this is the default flavor
+* **prodNoAa**: Identical to `prod`, but without Android Auto support
 * **beta**: Beta testing builds with Firebase Test Lab integration
-* **prod**: Production builds for Google Play Store
+* **alpha**: Internal alpha testing builds
+* **joel** / **tanay**: Personal developer builds used by maintainers, signed with the debug key so they build without any keystore setup
+
+To build or run a specific flavor:
+
+```bash
+flutter run --flavor=prod
+flutter build apk --flavor=beta --release
+```
+
+**Adding your own flavor**
+
+If you'd like your own personal flavor (for example, to install a dev build alongside a production install without them overwriting each other), add a new entry to the `productFlavors` block in `android/app/build.gradle`:
+
+```gradle
+productFlavors {
+    myflavor {
+        dimension "app"
+        resValue "string", "app_name_en", "BlueBubbles (My Flavor)"
+        resValue "color", "ic_launcher_background", "#4c49de"
+        resValue "string", "file_provider", "com.bluebubbles.messaging.myflavor.fileprovider"
+        applicationId "com.bluebubbles.messaging.myflavor"
+    }
+}
+```
+
+Then give it a signing config in the `buildTypes.release` block:
+
+```gradle
+buildTypes {
+    release {
+        productFlavors.myflavor.signingConfig signingConfigs.debug // or signingConfigs.release
+        // ...other flavors
+    }
+}
+```
+
+Assigning `signingConfigs.debug` lets the flavor build immediately using Flutter's auto-generated debug keystore. Only assign `signingConfigs.release` once you've set up your own keystore, as described below.
+
+### Signing Keys (Keystore)
+
+**Debug builds** — `flutter run`, or any flavor assigned `signingConfigs.debug` (like `joel` and `tanay`) — require no setup from you. Flutter automatically generates a debug keystore (`~/.android/debug.keystore`) the first time you build, and it's used automatically.
+
+**Release builds** — `flutter build apk --release`, for flavors assigned `signingConfigs.release` (`prod`, `prodNoAa`, `beta`, `alpha`) — need a keystore you control:
+
+1. Generate a keystore with the JDK's `keytool`:
+
+   ```bash
+   keytool -genkey -v -keystore ~/bluebubbles-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias bluebubbles
+   ```
+
+2. Create `android/key.properties` (this file is gitignored — never commit it):
+
+   ```properties
+   storePassword=<your keystore password>
+   keyPassword=<your key password>
+   keyAlias=bluebubbles
+   storeFile=/absolute/path/to/bluebubbles-release-key.jks
+   ```
+
+`android/app/build.gradle` reads `key.properties` automatically and wires it into `signingConfigs.release` — no other changes are needed. If `key.properties` is missing, any flavor using `signingConfigs.release` will fail to build with a signing error. While testing locally, it's often easiest to just build one of the debug-signed flavors (`joel`/`tanay`) instead of setting up a keystore.
 
 ### Web
 
-1. In `/lib/repository/models/html` add a new file called `giphy.dart`. Inside this, put only `const GIPHY_API_KEY = "";`. If you have your own API key for GIPHY, you can place it inside the quotes, otherwise leave it as is.
-2. In the terminal window at the root of the project directory, run `flutter build web --web-renderer=canvaskit`. It will output the build files to `build/web` to be hosted on your server.
+In the terminal window at the root of the project directory, run `flutter build web --web-renderer=canvaskit`. It will output the build files to `build/web` to be hosted on your server.
 
 ### Desktop
 
