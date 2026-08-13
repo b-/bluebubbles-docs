@@ -7,8 +7,8 @@ Tailscale is a mesh VPN software that uses WireGuard technology. It also include
 --- 
 Requirements
 - [Tailscale account](https://login.tailscale.com/start)
-- Enable [HTTPS certificates](https://login.tailscale.com/admin/dns) in the [admin console](https://login.tailscale.com/admin/dns).
-- Open the [**Access controls**](https://login.tailscale.com/admin/acls) page in the admin console and click the **Add Funnel to policy** button
+- Tailscale v1.38.3 or later
+- [MagicDNS](https://login.tailscale.com/admin/dns) enabled for your tailnet
 ---
 1. Download Tailscale from the [Mac App Store](https://apps.apple.com/ca/app/tailscale/id1475387142) or [directly from Tailscale](https://pkgs.tailscale.com/stable/#macos) 
 
@@ -20,33 +20,38 @@ echo 'alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"' | 
 ```
 Alternatively, you can use `/Applications/Tailscale.app/Contents/MacOS/Tailscale <command>` 
 
-4. Proxy requests to BlueBubbles's local web server on the default port 1234. Make sure to check your setup in case a different port is being used. Supported serve ports are 443, 8443, or 10000.
-
-```bash
-tailscale serve --bg --https=443 1234
-```
-
-5. Enable the funnel to route proxy traffic over Tailscale funnel servers. Again, supported ports are 443, 8443, or 10000 - match with what you chose in Step 4. Replace port 1234 with your BlueBubble's local web server.
+4. Start a Funnel that proxies to the BlueBubbles local web server on its default port, `1234`. If your server uses a different local port, replace `1234`. Funnel can listen publicly on ports 443, 8443, or 10000.
 
 ```bash
 tailscale funnel --bg --https=443 1234
 ```
 
-6. Check the funnel status with the following - you should see `(Funnel on)`:
+{% hint style="warning" %}
+If you followed an older version of this guide, first inspect both `tailscale serve status` and `tailscale funnel status` for a persisted Serve route on port 443. Running the Funnel command above makes Funnel the active mode for that public port; confirm the route afterward with `tailscale funnel status`. Do not use a blanket `tailscale serve reset` as a migration shortcut because it also removes unrelated Serve routes on the machine.
+{% endhint %}
+
+The first time you run this command, Tailscale opens a browser page for you to approve Funnel. After approval, Tailscale automatically provisions the HTTPS certificate and adds the default Funnel node attribute to your tailnet policy.
+
+{% hint style="info" %}
+If the approval page does not open or the policy update fails, open [**Access controls**](https://login.tailscale.com/admin/acls), expand the **Funnel** section, and select **Add Funnel to policy**. This manual step is normally unnecessary.
+{% endhint %}
+
+5. Check the Funnel status. The output lists the public URL and its route to your local BlueBubbles server:
 
 ```bash
-tailscale serve status 
+tailscale funnel status
 ```
 
-7. Finally, copy the entire URL that you see in step 6 to the BlueBubbles Proxy Service drop-down menu:
+6. Copy the entire URL shown in step 5. In BlueBubbles, select **Dynamic DNS / Custom URL** from the **Proxy Setup** dropdown and enter that URL:
 
 ```bash
-https://machine-name.example.ts.net:443/
+https://machine-name.example.ts.net/
 ```
 
 ---
-- [Tailscale Funnel CLI](https://tailscale.com/kb/1080/cli/#serve)
-- [Tailscale Funnel Documentation](https://tailscale.com/kb/1223/tailscale-funnel/)
+- [Tailscale Funnel CLI](https://tailscale.com/docs/reference/tailscale-cli/funnel)
+- [Tailscale Serve CLI](https://tailscale.com/docs/reference/tailscale-cli/serve)
+- [Tailscale Funnel Documentation](https://tailscale.com/docs/features/tailscale-funnel)
 - [Access Control Lists (ACLs)](https://tailscale.com/kb/1018/acls/)
 - [Download](https://tailscale.com/download/mac)
 - [Introduction to Tailscale funnel](https://tailscale.com/blog/introducing-tailscale-funnel/)
